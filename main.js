@@ -35,7 +35,7 @@ function gameover()
 function draw()
  {
     background(255,204,204); //נצבע את המשטח כל פעם מחדש(כל מה שהיה לפני נמחק)
- 	  drawGrid();
+ 	//  drawGrid();
 	  
 	mySnake.updateLocation();
 	
