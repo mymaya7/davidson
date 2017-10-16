@@ -65,59 +65,111 @@ function draw()
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
 function keyPressed(){
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
-// Yspeed = 0;
-// Xspeed = 0;
+var x=0;
+var y=0;
 
   if(keyCode === DOWN_ARROW){
-    if(Yspeed != -Scl)
-		Yspeed=Scl;
-	Xspeed=0;	
+    y=1;
+	x=0;		
   }else if(keyCode === UP_ARROW){
-    if(Yspeed != Scl)
-		Yspeed=-Scl;
-	Xspeed=0;	
+    y=-1;
+	x=0;	
+		
   }else if(keyCode === LEFT_ARROW){
-    if(Xspeed != Scl)
-		Xspeed=-Scl;
-	Yspeed=0;	
+     y=0;
+	x=-1;	
   }else if(keyCode === RIGHT_ARROW){
-    if(Xspeed != -Scl)
-		Xspeed=Scl;
-	Yspeed=0;	
+     y=0;
+	x=1;	
   }
    else if(keyCode === 107){ //add (+)
     FPSspeed++;
 	 console.log('update speed !!!' , FPSspeed);
 	 frameRate(FPSspeed);
+	 return;
   }
      else if(keyCode === 109){ // subtract (-)
      FPSspeed--;
 	 console.log('update speed !!!' , FPSspeed);
 	 frameRate(FPSspeed);
+	 return;
   }
-  mySnake.updateDirection(Xspeed,Yspeed);
+  moveSnake(x,y);
 }
 
+function touchEnded() {
+var x=0;
+var y=0;
+	
+	
+	var len =  touches.length;
+	if(len<10)
+	 return;
+	 line(touches[0].x, touches[0].y, touches[len-1].x, touches[len-1].y);
+	var deltax = touches[len-1].x - touches[0].x;
+	var deltay = touches[len-1].y - touches[0].y;
+	if( deltay > 0 && deltay > 10) // Down
+	{
+		y=1; x=0;
+	}  
+    if( deltay < 0 && deltay < -10) // Up
+	{
+		y=-1; x=0;
+	}  
+    if( deltax < 0 && deltax < -10) // Left
+	{
+		y=0; x=-1;
+	}
+    if( deltax > 0 && deltax > 10) // Right
+	{
+		y=0; x=1;
+	} 
+	if(x!=0 || y!=0)
+		moveSnake(x,y);  	
+}
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
-function touchStarted(){
+function touchStarted1(){
+// מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
+var x=0;
+var y=0;
+
+  if(mouseY/Scl > height/Scl - 5){ // down
+    y=1;
+	x=0;	
+  }else if(mouseY/Scl  < 5){ //up
+    y=-1;
+	x=0;	
+  }else if(mouseX/Scl  <  5 ){ //left
+    y=0;
+	x=-1;
+  }else if(mouseX/Scl  > width/Scl - 5 ){ //right
+    y=0;
+	x=1;	
+  }
+   
+   moveSnake(x,y);
+}
+
+// פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
+function moveSnake(x,y){
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 // Yspeed = 0;
 // Xspeed = 0;
 
-  if(mouseY/Scl > height/Scl - 5){
+  if(y ===  1){//DOWN
     if(Yspeed != -Scl)
 		Yspeed=Scl;
 	Xspeed=0;	
-  }else if(mouseY/Scl  < 5){
+  }else if(y === -1){ //UP
     if(Yspeed != Scl)
 		Yspeed=-Scl;
 	Xspeed=0;	
-  }else if(mouseX/Scl  <  5 ){
+  }else if(x === -1){// LEFT
     if(Xspeed != Scl)
 		Xspeed=-Scl;
 	Yspeed=0;	
-  }else if(mouseX/Scl  > width/Scl - 5 ){
+  }else if(x === 1){ //RIGHT
     if(Xspeed != -Scl)
 		Xspeed=Scl;
 	Yspeed=0;	
@@ -125,6 +177,9 @@ function touchStarted(){
    
   mySnake.updateDirection(Xspeed,Yspeed);
 }
+
+
+
 
 function drawGrid()
 {
