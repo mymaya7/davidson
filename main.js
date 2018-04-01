@@ -1,5 +1,4 @@
-
-
+var autoMode=true;
 var Xfood;
 var Yfood;
 var Xspeed=0;
@@ -25,8 +24,8 @@ function gameover()
 	Yspeed = 0;
     Xspeed = 0;
 	frameRate(FPSspeed);  //מספר הפריימים בשנייה
-	updateFood();
 	mySnake = new snake();
+	updateFood();
 }
 //הפונקציה נקראת על ידי המערכת באופן רציף כלומר פעם אחר פעם (לולאה אין סופית) והיא המנוע של התוכנית.
 
@@ -35,9 +34,14 @@ function gameover()
 function draw()
  {
     background(255,204,204); //נצבע את המשטח כל פעם מחדש(כל מה שהיה לפני נמחק)
- 	//  drawGrid();
+ 	  drawGrid();
 	  
+ //	if(autoMode) 
+ 	mySnake.calcNextMove(Xfood,Yfood);
+ 	 
+ 	  
 	mySnake.updateLocation();
+	
 	
 	
 	mySnake.drawSnake();
@@ -94,7 +98,7 @@ var y=0;
 	 frameRate(FPSspeed);
 	 return;
   }
-  moveSnake(x,y);
+  nextMoveValue(x,y);
 }
 
 function touchEnded() {
@@ -125,11 +129,11 @@ var y=0;
 		y=0; x=1;
 	} 
 	if(x!=0 || y!=0)
-		moveSnake(x,y);  	
+		nextMoveValue(x,y);  	
 }
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
-function touchStarted(){
+function touchStarted1(){
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 var x=0;
 var y=0;
@@ -148,11 +152,11 @@ var y=0;
 	x=1;	
   }
    
-   moveSnake(x,y);
+  nextMoveValue(x,y);
 }
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
-function moveSnake(x,y){
+function nextMoveValue(x,y){
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 // Yspeed = 0;
 // Xspeed = 0;
@@ -201,12 +205,22 @@ function drawFood()
 function cheakEat()
 {
 // אם הסנייק אוכל את הפיתיון אז בחירות מיקום חדש לפיתיון
+	mySnake.isPartOfSnake(Yfood,Yfood);
 	return(Xfood==mySnake.headXpos && Yfood==mySnake.headYpos)
 }
 function updateFood()
 {
-		Xfood=int(random(0,width/Scl))*Scl;
-		Yfood=int(random(0,height/Scl))*Scl;
+    var x,y;
+		x=int(random(0,width/Scl))*Scl;
+		y=int(random(0,height/Scl))*Scl;
+		
+		while(mySnake.isPartOfSnake(x,y))
+		{
+		  x=int(random(0,width/Scl))*Scl;
+		  y=int(random(0,height/Scl))*Scl;
+		}
+		Xfood=x;
+		Yfood=y;
 		
 }
 

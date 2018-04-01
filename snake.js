@@ -48,6 +48,16 @@ function snake()
 	 return false;
 	}
 	
+	this.isPartOfSnake= function(x,y)
+	{
+	 for(var i=this.joints.length-2 ; i >=0  ; i--)
+	 {
+	   if( this.joints[i].Xpos==x && this.joints[i].Ypos==y)
+		return true;
+	 }
+	 return false;
+	}
+	
 	 this.updateDirection = function(x,y)
     { 
       this.Xspeed=x; // ההתקדמות שלו בציר האיקס היא המיקום הקודם ועוד המהירות, אם יש, בציר האיקס
@@ -77,9 +87,9 @@ function snake()
 	   for(var i=0 ; i < this.joints.length-1 ; i++)
 	  {
 	    if(i==0)
-			fill(0,255,0);
+			fill(200,80,10);
 		else
-            fill(255);		
+            fill(178);		
 		this.joints[i].drawJoint();
 	  }
 	}
@@ -93,9 +103,63 @@ function snake()
       this.headYpos = y;
 	  console.log(this.joints.length);
 	}
- 
+	this.calcNextMove = function(Xfood,Yfood)
+	{
+		var x=0,y=0;
+		if(this.headXpos>Xfood)
+		{
+			if(this.Xspeed!=1)
+				x=-1;
+		}
+		else if(this.headXpos<Xfood)
+		{
+			if(this.Xspeed!=-1)
+				x=1;
+		}
+		
+		if(x==0)
+		{
+			if(this.headYpos>Yfood)
+			{
+				if(this.Yspeed!=1)
+					y=-1;
+			}
+			else if(this.headYpos<Yfood)
+			{
+				if(this.Yspeed!=-1)
+					y=1;
+			}
+		}
+		if(x==0 && y==0)
+		{
+			if (this.Xspeed!=0)
+				y=1;
+			else if (this.Yspeed!=0)
+				x=1;
+		}
+		if(!this.isPartOfSnake(this.headXpos+x*Scl,this.headYpos+y*Scl))
+		   this.updateDirection(x*Scl,y*Scl);
+		else
+			{
+			
+			    var tmpx,tmpy
+					tmpx=int(random(0,width/Scl))*Scl;
+					tmpy=int(random(0,height/Scl))*Scl;
+					
+					while(mySnake.isPartOfSnake(tmpx,tmpy))
+					{
+					  tmpx=int(random(0,width/Scl))*Scl;
+					  tmpy=int(random(0,height/Scl))*Scl;
+					}
+					
+					this.calcNextMove(tmpx,tmpy);		
+			}
+			
+			
+			
+	}
 }
-
+	
 function joint()
 {
   this.Ypos = 0;
@@ -112,7 +176,8 @@ function joint()
     { 
       this.Xpos=x; // ההתקדמות שלו בציר האיקס היא המיקום הקודם ועוד המהירות, אם יש, בציר האיקס
 	  this.Ypos=y;
-
     }
-  
 }
+
+
+
