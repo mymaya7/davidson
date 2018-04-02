@@ -23,7 +23,7 @@ function gameover()
 	FPSspeed=5;
 	if(autoMode)
 	{		
-	  FPSspeed=30;
+	  FPSspeed=20;
     }
 	Yspeed = 0;
     Xspeed = 0;
@@ -78,32 +78,58 @@ function keyPressed()
 var x=0;
 var y=0;
 
-  if(keyCode === DOWN_ARROW){
-    y=1;
-	x=0;		
-  }else if(keyCode === UP_ARROW){
+  if(keyCode === DOWN_ARROW)
+  {
+	y=1;
+  	x=0;		
+  }
+  else if(keyCode === UP_ARROW)
+  {
     y=-1;
-	x=0;	
-		
-  }else if(keyCode === LEFT_ARROW){
-     y=0;
+	x=0;		
+  }
+  else if(keyCode === LEFT_ARROW)
+  {
+    y=0;
 	x=-1;	
-  }else if(keyCode === RIGHT_ARROW){
-     y=0;
+  }
+  else if(keyCode === RIGHT_ARROW)
+  {
+    y=0;
 	x=1;	
   }
-   else if(keyCode === 107){ //add (+)
+  else if(keyCode === 107)
+  { //add (+)
     FPSspeed++;
-	 console.log('update speed !!!' , FPSspeed);
-	 frameRate(FPSspeed);
-	 return;
+	console.log('update speed !!!' , FPSspeed);
+	frameRate(FPSspeed);
+	return;
+  }  
+  else if(keyCode === 109)
+  { // subtract (-)
+    FPSspeed--;
+	console.log('update speed !!!' , FPSspeed);
+	frameRate(FPSspeed);
+	return;
   }
-     else if(keyCode === 109){ // subtract (-)
-     FPSspeed--;
-	 console.log('update speed !!!' , FPSspeed);
-	 frameRate(FPSspeed);
-	 return;
+  else if(keyCode === 65)// A = auto mode
+  {
+    FPSspeed=25;
+    frameRate(FPSspeed);
+    autoMode=true;
+    return;
   }
+  else if(keyCode === 77)// M = Manual mode
+  {
+    FPSspeed=5;
+    frameRate(FPSspeed);
+    autoMode=false;
+    x=0;
+    y=0;
+  }
+  else
+	  return;
+  
   nextMoveValue(x,y);
 }
 
@@ -164,8 +190,7 @@ var y=0;
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
 function nextMoveValue(x,y){
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
-// Yspeed = 0;
-// Xspeed = 0;
+
 
   if(y ===  1){//DOWN
     if(Yspeed != -Scl)
@@ -183,7 +208,11 @@ function nextMoveValue(x,y){
     if(Xspeed != -Scl)
 		Xspeed=Scl;
 	Yspeed=0;	
-  }
+  }else if(x==0 && y==0){
+	Xspeed=0;
+	Yspeed=0;
+ }
+	  
    
   mySnake.updateDirection(Xspeed,Yspeed);
 }

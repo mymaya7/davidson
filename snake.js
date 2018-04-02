@@ -50,16 +50,18 @@ function snake()
 /////////////////////////////////////////////////////////////////////
 	 this.updateLocation = function()
     { 
-	  for(var i=this.joints.length-1 ; i > 0  ; i--)
-	  {
-		this.joints[i].updateJointLocation(this.joints[i-1].Xpos,this.joints[i-1].Ypos);
-	  }
-
-	  this.joints[0].updateJointLocation(this.joints[0].Xpos+this.Xspeed,this.joints[0].Ypos+this.Yspeed);
-	  
-      this.headXpos = this.joints[0].Xpos;	
-	  this.headYpos = this.joints[0].Ypos;
-
+	 if(this.Xspeed!=0 || this.Yspeed!=0)
+	 {
+		  for(var i=this.joints.length-1 ; i > 0  ; i--)
+		  {
+			this.joints[i].updateJointLocation(this.joints[i-1].Xpos,this.joints[i-1].Ypos);
+		  }
+	
+		  this.joints[0].updateJointLocation(this.joints[0].Xpos+this.Xspeed,this.joints[0].Ypos+this.Yspeed);
+		  
+	      this.headXpos = this.joints[0].Xpos;	
+		  this.headYpos = this.joints[0].Ypos;
+	 }
     }
     
 /////////////////////////////////////////////////////////////////////
