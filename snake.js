@@ -142,10 +142,10 @@ function snake()
 		else
 			{
 			
-			    if((this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos+0*Scl))
-					&&(this.isPartOfSnake(this.headXpos-1*Scl,this.headYpos+0*Scl))
-						&&(this.isPartOfSnake(this.headXpos+0*Scl,this.headYpos+1*Scl))
-							&&(this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos-1*Scl)))
+			    if((this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos))
+					&&(this.isPartOfSnake(this.headXpos-1*Scl,this.headYpos))
+						&&(this.isPartOfSnake(this.headXpos,this.headYpos+1*Scl))
+							&&(this.isPartOfSnake(this.headXpos,this.headYpos-1*Scl)))
 				{ // dead end we are going to die :(
 				    x=1;
 				    this.updateDirection(x*Scl,y*Scl);
@@ -153,7 +153,8 @@ function snake()
 				else
 				{
 					
-					var tmpx,tmpy
+					var tmpx,tmpy;
+					
 					tmpx=int(random(0,width/Scl))*Scl;
 					tmpy=int(random(0,height/Scl))*Scl;
 					

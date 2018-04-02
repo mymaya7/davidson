@@ -21,6 +21,10 @@ function gameover()
 	createCanvas(Scl*Len, Scl*Len); // המשטח בגודל של מספר המשבצות למשל 20 כפול גודל משבצת
 	background(170); //הצבע של הרקע
 	FPSspeed=5;
+	if(autoMode)
+	{		
+	  FPSspeed=25;
+    }
 	Yspeed = 0;
     Xspeed = 0;
 	frameRate(FPSspeed);  //מספר הפריימים בשנייה
@@ -36,8 +40,12 @@ function draw()
     background(255,204,204); //נצבע את המשטח כל פעם מחדש(כל מה שהיה לפני נמחק)
  	  drawGrid();
 	  
- //	if(autoMode) 
- 	mySnake.calcNextMove(Xfood,Yfood);
+ 	if(autoMode)
+	{		
+		mySnake.calcNextMove(Xfood,Yfood);
+		//FPSspeed=5;
+    	//frameRate(FPSspeed); 
+	}
  	 
  	  
 	mySnake.updateLocation();
