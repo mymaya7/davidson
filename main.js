@@ -1,4 +1,4 @@
-var autoMode=true;
+var autoMode=false;
 var Xfood;
 var Yfood;
 var Xspeed=0;
@@ -43,12 +43,9 @@ function draw()
  	if(autoMode)
 	{		
 		mySnake.calcNextMove(Xfood,Yfood);
-		//FPSspeed=5;
-    	//frameRate(FPSspeed); 
 	}
- 	 
- 	  
-	mySnake.updateLocation();
+ 	
+ 	mySnake.updateLocation();
 	
 	
 	
@@ -60,7 +57,7 @@ function draw()
 	drawFood();
     if(cheakEat())
 	{
-      mySnake.addJoint(Xfood,Yfood);
+      mySnake.addJoint();
 
 	  updateFood(Xfood,Yfood);
 	  //console.log('eat!!!');
@@ -75,7 +72,8 @@ function draw()
 //********************************************************************
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
-function keyPressed(){
+function keyPressed()
+{
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 var x=0;
 var y=0;
@@ -213,7 +211,6 @@ function drawFood()
 function cheakEat()
 {
 // אם הסנייק אוכל את הפיתיון אז בחירות מיקום חדש לפיתיון
-	mySnake.isPartOfSnake(Yfood,Yfood);
 	return(Xfood==mySnake.headXpos && Yfood==mySnake.headYpos)
 }
 function updateFood()

@@ -12,30 +12,12 @@ function snake()
 /////////////////////////////////////////////////////////////////////	
 	this.checkEdges= function()
 	{
-	var retVal=false;
 	// כדי שיחזור מצד שני אם מגיע לשוליים
-		if(this.headXpos>=width)
-		{
-		  this.joints[0].Xpos=0;
-		  retVal=true;
-		}
-		if(	this.headXpos<0)
-		{
-		  this.joints[0].Xpos=width-Scl;
-		  retVal=true;
-		}
-		  
-		if(	this.headYpos>=height)
-		{
-		  this.joints[0].Ypos=0+Scl;
-		  retVal=true;
-		}
-		if(this.headYpos<0)
-		{
-		  this.joints[0].Ypos=height;
-		  retVal=true;
-		}
-	 return retVal;	
+		if((this.headXpos>=width)||(this.headXpos<0)||(this.headYpos>=height)||(this.headYpos<0))
+			return true;
+		else
+			return false;
+		
 	}
 /////////////////////////////////////////////////////////////////////	
 	this.isSelfTouch= function()
@@ -68,8 +50,6 @@ function snake()
 /////////////////////////////////////////////////////////////////////
 	 this.updateLocation = function()
     { 
-	
-	 
 	  for(var i=this.joints.length-1 ; i > 0  ; i--)
 	  {
 		this.joints[i].updateJointLocation(this.joints[i-1].Xpos,this.joints[i-1].Ypos);
@@ -91,7 +71,7 @@ function snake()
 	   for(var i=0 ; i < this.joints.length-1 ; i++)
 	  {
 	    if(i==0)
-			fill(200,80,10);
+			fill(255);
 		else
             fill(178);		
 		this.joints[i].drawJoint();
@@ -100,13 +80,11 @@ function snake()
 	
 /////////////////////////////////////////////////////////////////////
 	
-	this.addJoint = function(x,y)
+	this.addJoint = function()
 	{
 	  this.joints[this.joints.length] = new joint();
 	  this.joints[this.joints.length-1].updateJointLocation(this.joints[this.joints.length-2].Xpos,this.joints[this.joints.length-2].Ypos);
-	  this.joints[0].updateJointLocation(x,y);
-	  this.headXpos = x;
-      this.headYpos = y;
+	 	
 	  console.log('eat!!! ', this.joints.length);
 	}
 	
