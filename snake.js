@@ -101,10 +101,11 @@ function snake()
 	  this.joints[0].updateJointLocation(x,y);
 	  this.headXpos = x;
       this.headYpos = y;
-	  console.log(this.joints.length);
+	  console.log('eat!!! ', this.joints.length);
 	}
 	this.calcNextMove = function(Xfood,Yfood)
 	{
+		//console.log('calcNextMove ', Xfood , Xfood);
 		var x=0,y=0;
 		if(this.headXpos>Xfood)
 		{
@@ -142,10 +143,10 @@ function snake()
 		else
 			{
 			
-			    if((this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos))
-					&&(this.isPartOfSnake(this.headXpos-1*Scl,this.headYpos))
-						&&(this.isPartOfSnake(this.headXpos,this.headYpos+1*Scl))
-							&&(this.isPartOfSnake(this.headXpos,this.headYpos-1*Scl)))
+			    if(((this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos)) || (this.headXpos+Scl>=width))
+					&&((this.isPartOfSnake(this.headXpos-1*Scl,this.headYpos)) || (this.headXpos-Scl<0))
+						&&((this.isPartOfSnake(this.headXpos,this.headYpos+1*Scl)) || (this.headYpos+Scl>=height))
+							&&((this.isPartOfSnake(this.headXpos,this.headYpos-1*Scl)) || (this.headYpos-Scl<0)) )
 				{ // dead end we are going to die :(
 				    x=1;
 				    this.updateDirection(x*Scl,y*Scl);
@@ -163,7 +164,7 @@ function snake()
 					  tmpx=int(random(0,width/Scl))*Scl;
 					  tmpy=int(random(0,height/Scl))*Scl;
 					}
-					
+					//console.log('recall calcNextMove ' ,tmpx , tmpy);
 					this.calcNextMove(tmpx,tmpy);	
 				}					
 			}

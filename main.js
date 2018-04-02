@@ -23,7 +23,7 @@ function gameover()
 	FPSspeed=5;
 	if(autoMode)
 	{		
-	  FPSspeed=25;
+	  FPSspeed=30;
     }
 	Yspeed = 0;
     Xspeed = 0;
@@ -63,7 +63,7 @@ function draw()
       mySnake.addJoint(Xfood,Yfood);
 
 	  updateFood(Xfood,Yfood);
-	  console.log('eat!!!');
+	  //console.log('eat!!!');
 	 }
 	
 }
