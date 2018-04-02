@@ -142,7 +142,18 @@ function snake()
 		else
 			{
 			
-			    var tmpx,tmpy
+			    if((this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos+0*Scl))
+					&&(this.isPartOfSnake(this.headXpos-1*Scl,this.headYpos+0*Scl))
+						&&(this.isPartOfSnake(this.headXpos+0*Scl,this.headYpos+1*Scl))
+							&&(this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos-1*Scl)))
+				{ // dead end we are going to die :(
+				    x=1;
+				    this.updateDirection(x*Scl,y*Scl);
+				}
+				else
+				{
+					
+					var tmpx,tmpy
 					tmpx=int(random(0,width/Scl))*Scl;
 					tmpy=int(random(0,height/Scl))*Scl;
 					
@@ -152,7 +163,8 @@ function snake()
 					  tmpy=int(random(0,height/Scl))*Scl;
 					}
 					
-					this.calcNextMove(tmpx,tmpy);		
+					this.calcNextMove(tmpx,tmpy);	
+				}					
 			}
 			
 			
