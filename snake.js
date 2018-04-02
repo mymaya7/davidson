@@ -9,7 +9,7 @@ function snake()
      this.joints = [];
 	 this.joints[0] = new joint();
 	 this.joints[1] = new joint();
-	
+/////////////////////////////////////////////////////////////////////	
 	this.checkEdges= function()
 	{
 	var retVal=false;
@@ -37,7 +37,7 @@ function snake()
 		}
 	 return retVal;	
 	}
-	
+/////////////////////////////////////////////////////////////////////	
 	this.isSelfTouch= function()
 	{
 	 for(var i=this.joints.length-2 ; i > 0  ; i--)
@@ -47,7 +47,7 @@ function snake()
 	 }
 	 return false;
 	}
-	
+/////////////////////////////////////////////////////////////////////	
 	this.isPartOfSnake= function(x,y)
 	{
 	 for(var i=this.joints.length-2 ; i >=0  ; i--)
@@ -65,6 +65,7 @@ function snake()
 
     }
 	
+/////////////////////////////////////////////////////////////////////
 	 this.updateLocation = function()
     { 
 	
@@ -80,7 +81,10 @@ function snake()
 	  this.headYpos = this.joints[0].Ypos;
 
     }
-	this.drawSnake = function()
+    
+/////////////////////////////////////////////////////////////////////
+	
+	 this.drawSnake = function()
 	{
 	 // ציור הסנייק
 			
@@ -94,6 +98,8 @@ function snake()
 	  }
 	}
 	
+/////////////////////////////////////////////////////////////////////
+	
 	this.addJoint = function(x,y)
 	{
 	  this.joints[this.joints.length] = new joint();
@@ -103,6 +109,9 @@ function snake()
       this.headYpos = y;
 	  console.log('eat!!! ', this.joints.length);
 	}
+	
+/////////////////////////////////////////////////////////////////////
+	
 	this.calcNextMove = function(Xfood,Yfood)
 	{
 		//console.log('calcNextMove ', Xfood , Xfood);
@@ -141,51 +150,54 @@ function snake()
 		if(!this.isPartOfSnake(this.headXpos+x*Scl,this.headYpos+y*Scl))
 		   this.updateDirection(x*Scl,y*Scl);
 		else
-			{
-			
-			    if(((this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos)) || (this.headXpos+Scl>=width))
-					&&((this.isPartOfSnake(this.headXpos-1*Scl,this.headYpos)) || (this.headXpos-Scl<0))
-						&&((this.isPartOfSnake(this.headXpos,this.headYpos+1*Scl)) || (this.headYpos+Scl>=height))
-							&&((this.isPartOfSnake(this.headXpos,this.headYpos-1*Scl)) || (this.headYpos-Scl<0)) )
-				{ // dead end we are going to die :(
-				    x=1;
-				    this.updateDirection(x*Scl,y*Scl);
-				}
-				else
-				{
-					
-					var tmpx,tmpy;
-					
-					tmpx=int(random(0,width/Scl))*Scl;
-					tmpy=int(random(0,height/Scl))*Scl;
-					
-					while(mySnake.isPartOfSnake(tmpx,tmpy))
-					{
-					  tmpx=int(random(0,width/Scl))*Scl;
-					  tmpy=int(random(0,height/Scl))*Scl;
-					}
-					//console.log('recall calcNextMove ' ,tmpx , tmpy);
-					this.calcNextMove(tmpx,tmpy);	
-				}					
+		{
+		    if(((this.isPartOfSnake(this.headXpos+1*Scl,this.headYpos)) || (this.headXpos+Scl>=width))
+				&&((this.isPartOfSnake(this.headXpos-1*Scl,this.headYpos)) || (this.headXpos-Scl<0))
+					&&((this.isPartOfSnake(this.headXpos,this.headYpos+1*Scl)) || (this.headYpos+Scl>=height))
+						&&((this.isPartOfSnake(this.headXpos,this.headYpos-1*Scl)) || (this.headYpos-Scl<0)) )
+			{ // dead end we are going to die :(
+			    x=1;
+			    this.updateDirection(x*Scl,y*Scl);
 			}
+			else
+			{
+				
+				var tmpx,tmpy;
+				
+				tmpx=int(random(0,width/Scl))*Scl;
+				tmpy=int(random(0,height/Scl))*Scl;
+				
+				while(mySnake.isPartOfSnake(tmpx,tmpy))
+				{
+				  tmpx=int(random(0,width/Scl))*Scl;
+				  tmpy=int(random(0,height/Scl))*Scl;
+				}
+				//console.log('recall calcNextMove ' ,tmpx , tmpy);
+				this.calcNextMove(tmpx,tmpy);	
+			}					
+		}
 			
 			
 			
 	}
 }
 	
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 function joint()
 {
   this.Ypos = 0;
   this.Xpos = 0;
-  
+/////////////////////////////////////////////////////////////////////  
   	this.drawJoint = function(x,y)
 	{
 	 // ציור הסנייק
 		      	
 		rect(  this.Xpos, this.Ypos,Scl,Scl);
 	}
-	
+/////////////////////////////////////////////////////////////////////	
 	 this.updateJointLocation = function(x,y)
     { 
       this.Xpos=x; // ההתקדמות שלו בציר האיקס היא המיקום הקודם ועוד המהירות, אם יש, בציר האיקס
