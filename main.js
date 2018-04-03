@@ -156,7 +156,7 @@ var y=0;
   nextMoveValue(x,y);
 }
 
-function touchEnded() {
+function touchEnded1() {
 var x=0;
 var y=0;
 	
@@ -183,12 +183,13 @@ var y=0;
 	{
 		y=0; x=1;
 	} 
+	
 	if(x!=0 || y!=0)
 		nextMoveValue(x,y);  	
 }
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
-function touchStarted1(){
+function touchStarted(){
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 var x=0;
 var y=0;
