@@ -86,8 +86,7 @@ function snake()
 	{
 	  this.joints[this.joints.length] = new joint();
 	  this.joints[this.joints.length-1].updateJointLocation(this.joints[this.joints.length-2].Xpos,this.joints[this.joints.length-2].Ypos);
-	 	
-	  console.log('eat!!! ', this.joints.length);
+	    
 	}
 	
 /////////////////////////////////////////////////////////////////////

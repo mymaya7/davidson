@@ -8,18 +8,19 @@ var Len=20;
 
 var mySnake;
 var FPSspeed=5;
-
+var startGameSecond = 0;
 // פונקציה סטאפ שקוראת פעם אחת
 function setup() 
 {
- gameover();
+ createCanvas(Scl*Len, Scl*Len); // המשטח בגודל של מספר המשבצות למשל 20 כפול גודל משבצת
+ background(170); //הצבע של הרקע	
+ newgame();
 }
 
 
-function gameover()
+function newgame()
 {
-	createCanvas(Scl*Len, Scl*Len); // המשטח בגודל של מספר המשבצות למשל 20 כפול גודל משבצת
-	background(170); //הצבע של הרקע
+
 	FPSspeed=5;
 	if(autoMode)
 	{		
@@ -30,6 +31,7 @@ function gameover()
 	frameRate(FPSspeed);  //מספר הפריימים בשנייה
 	mySnake = new snake();
 	updateFood();
+	startGameSecond = millis()/1000;
 }
 //הפונקציה נקראת על ידי המערכת באופן רציף כלומר פעם אחר פעם (לולאה אין סופית) והיא המנוע של התוכנית.
 
@@ -38,7 +40,7 @@ function gameover()
 function draw()
  {
     background(255,204,204); //נצבע את המשטח כל פעם מחדש(כל מה שהיה לפני נמחק)
- 	  drawGrid();
+ 	drawGrid();
 	  
  	if(autoMode)
 	{		
@@ -47,12 +49,24 @@ function draw()
  	
  	mySnake.updateLocation();
 	
-	
+	var second = millis()/1000-startGameSecond;
+	var currLen = mySnake.joints.length-1;
+	textSize(25);
+	textAlign(LEFT);
+	text(' Length ' + currLen, 45, 40);
+	text('\n Sec ' + second.toFixed(1) + currLen, 45, 40);
 	
 	mySnake.drawSnake();
 	if( mySnake.isSelfTouch() || mySnake.checkEdges())
 	{
-		gameover();
+		var currLen = mySnake.joints.length-1;
+		textSize(52);
+		fill(100, 102, 153);
+		textAlign(CENTER);
+	    text(' GameOver ' + second.toFixed(1) + 'Sec \n Total Length is ' + currLen, width/2, height/2);
+		//createAudio('assets/doorbell.mp3');
+		noLoop();
+	    return;
 	}
 	drawFood();
     if(cheakEat())
@@ -60,6 +74,7 @@ function draw()
       mySnake.addJoint();
 
 	  updateFood(Xfood,Yfood);
+	 
 	  //console.log('eat!!!');
 	 }
 	
@@ -77,7 +92,7 @@ function keyPressed()
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 var x=0;
 var y=0;
-
+  
   if(keyCode === DOWN_ARROW)
   {
 	y=1;
@@ -119,6 +134,14 @@ var y=0;
     autoMode=true;
     return;
   }
+   else if(keyCode === 32)// space = restart game
+  {
+	newgame();  
+    loop();
+	
+    return;
+  }
+   
   else if(keyCode === 77)// M = Manual mode
   {
     FPSspeed=5;
