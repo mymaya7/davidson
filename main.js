@@ -1,4 +1,4 @@
-var autoMode=false;
+var autoMode=true;
 var Xfood;
 var Yfood;
 var Xspeed=0;
