@@ -53,8 +53,8 @@ function draw()
 	var currLen = mySnake.joints.length-1;
 	textSize(25);
 	textAlign(LEFT);
-	text(' Length ' + currLen, 45, 40);
-	text('\n Sec ' + second.toFixed(1) + currLen, 45, 40);
+	text(' Length ' + currLen , 45, 40 );
+	text('\n Sec ' + second.toFixed(0) , 45, 40);
 	
 	mySnake.drawSnake();
 	if( mySnake.isSelfTouch() || mySnake.checkEdges())
