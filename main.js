@@ -8,6 +8,7 @@ var Len=20;
 
 var mySnake;
 var FPSspeed=5;
+var second =0;
 var startGameSecond = 0;
 // פונקציה סטאפ שקוראת פעם אחת
 function setup() 
@@ -42,33 +43,25 @@ function draw()
     background(255,204,204); //נצבע את המשטח כל פעם מחדש(כל מה שהיה לפני נמחק)
  	drawGrid();
 	  
- 	if(autoMode)
-	{		
-		mySnake.calcNextMove(Xfood,Yfood);
-	}
- 	
+ 	if(autoMode)	
+ 		mySnake.calcNextMove(Xfood,Yfood);
+	
  	mySnake.updateLocation();
-	
-	var second = millis()/1000-startGameSecond;
-	var currLen = mySnake.joints.length-1;
-	textSize(25);
-	textAlign(LEFT);
-	text(' Length ' + currLen , 45, 40 );
-	text('\n Sec ' + second.toFixed(0) , 45, 40);
-	
+ 	
 	mySnake.drawSnake();
+	
 	drawFood();
+	
 	if( mySnake.isSelfTouch() || mySnake.checkEdges())
 	{
 		var currLen = mySnake.joints.length-1;
 		textSize(52);
 		fill(100, 102, 153);
 		textAlign(CENTER);
-	    text(' GameOver ' + second.toFixed(1) + 'Sec \n Total Length is ' + currLen, width/2, height/2);
+	    text(' GameOver ' + second.toFixed(0) + 'Sec \n Total Length is ' + currLen, width/2, height/2);
 		//createAudio('assets/doorbell.mp3');
-		mySnake.drawSnake();
 		noLoop();
-	    return;
+		return;
 	}
 	
     if(cheakEat())
@@ -79,13 +72,20 @@ function draw()
 	 
 	  //console.log('eat!!!');
 	 }
+    putText();
 	
 }
 //################################################################################################################
 
-
-
-
+function putText()
+{
+	second = millis()/1000-startGameSecond;
+	var currLen = mySnake.joints.length-1;
+	textSize(25);
+	textAlign(LEFT);
+	text(' Length ' + currLen , 45, 40 );
+	text('\n Sec ' + second.toFixed(0) , 45, 40);
+}
 //********************************************************************
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
@@ -140,7 +140,6 @@ var y=0;
   {
 	newgame();  
     loop();
-	
     return;
   }
    
