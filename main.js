@@ -57,6 +57,7 @@ function draw()
 	text('\n Sec ' + second.toFixed(0) , 45, 40);
 	
 	mySnake.drawSnake();
+	drawFood();
 	if( mySnake.isSelfTouch() || mySnake.checkEdges())
 	{
 		var currLen = mySnake.joints.length-1;
@@ -65,10 +66,11 @@ function draw()
 		textAlign(CENTER);
 	    text(' GameOver ' + second.toFixed(1) + 'Sec \n Total Length is ' + currLen, width/2, height/2);
 		//createAudio('assets/doorbell.mp3');
+		mySnake.drawSnake();
 		noLoop();
 	    return;
 	}
-	drawFood();
+	
     if(cheakEat())
 	{
       mySnake.addJoint();

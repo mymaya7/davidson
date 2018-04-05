@@ -1,4 +1,4 @@
-
+/////////////////////////////////////////////////////////////////////	
 function snake()
 {
 	 this.headXpos = 0;	
@@ -39,7 +39,7 @@ function snake()
 	 }
 	 return false;
 	}
-	
+/////////////////////////////////////////////////////////////////////		
 	 this.updateDirection = function(x,y)
     { 
       this.Xspeed=x; // ההתקדמות שלו בציר האיקס היא המיקום הקודם ועוד המהירות, אם יש, בציר האיקס
@@ -70,14 +70,15 @@ function snake()
 	{
 	 // ציור הסנייק
 			
-	   for(var i=0 ; i < this.joints.length-1 ; i++)
+	   for(var i=1 ; i < this.joints.length-1 ; i++)
 	  {
-	    if(i==0)
-			fill(255);
-		else
-            fill(178);		
+	    fill(178);		
 		this.joints[i].drawJoint();
 	  }
+	     // draw the head
+	   	fill(255);
+		this.joints[0].drawJoint();
+		
 	}
 	
 /////////////////////////////////////////////////////////////////////
