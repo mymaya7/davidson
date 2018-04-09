@@ -1,2 +1,2 @@
-cd E:\Maya\davidson
+cd C:\My\Maya\davidson
 python -m http.server

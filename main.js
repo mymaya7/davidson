@@ -1,4 +1,5 @@
-var autoMode=true;
+var autoMode=false;
+var isRunning=false;
 var Xfood;
 var Yfood;
 var Xspeed=0;
@@ -33,6 +34,7 @@ function newgame()
 	mySnake = new snake();
 	updateFood();
 	startGameSecond = millis()/1000;
+	isRunning=true;
 }
 //הפונקציה נקראת על ידי המערכת באופן רציף כלומר פעם אחר פעם (לולאה אין סופית) והיא המנוע של התוכנית.
 
@@ -60,6 +62,7 @@ function draw()
 		textAlign(CENTER);
 	    text(' GameOver ' + second.toFixed(0) + 'Sec \n Total Length is ' + currLen, width/2, height/2);
 		//createAudio('assets/doorbell.mp3');
+		isRunning=false;
 		noLoop();
 		return;
 	}
@@ -94,6 +97,13 @@ function keyPressed()
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 var x=0;
 var y=0;
+  
+  if(isRunning==false)
+  {
+	newgame();  
+    loop();
+    return;
+  }
   
   if(keyCode === DOWN_ARROW)
   {
@@ -138,9 +148,9 @@ var y=0;
   }
    else if(keyCode === 32)// space = restart game
   {
-	newgame();  
-    loop();
-    return;
+//	newgame();  
+//    loop();
+//    return;
   }
    
   else if(keyCode === 77)// M = Manual mode
@@ -194,6 +204,13 @@ function touchStarted(){
 // מאפסים את מהירויות הכיוונים כדי שנישאר רק עם הלחיצה האחרונה
 var x=0;
 var y=0;
+
+ if(isRunning==false)
+  {
+	newgame();  
+    loop();
+    return;
+  }
 
   if(mouseY/Scl > height/Scl - 5){ // down
     y=1;
