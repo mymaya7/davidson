@@ -212,6 +212,13 @@ var y=0;
     return;
   }
 
+  if( autoMode==true)
+  {
+	   FPSspeed=5;
+       frameRate(FPSspeed);
+	   autoMode=false;
+  }
+  
   if(mouseY/Scl > height/Scl - 5){ // down
     y=1;
 	x=0;	
@@ -228,6 +235,13 @@ var y=0;
    
   nextMoveValue(x,y);
 }
+
+function touchMoved() {
+   FPSspeed=25;
+    frameRate(FPSspeed);
+    autoMode=true;
+    return;
+  }
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
 function nextMoveValue(x,y){
