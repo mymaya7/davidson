@@ -15,7 +15,6 @@ var startGameSecond = 0;
 function setup() 
 {
  createCanvas(Scl*Len, Scl*Len); // המשטח בגודל של מספר המשבצות למשל 20 כפול גודל משבצת
- background(170); //הצבע של הרקע	
  newgame();
 }
 

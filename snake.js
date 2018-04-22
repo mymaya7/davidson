@@ -72,7 +72,8 @@ function snake()
 			
 	   for(var i=1 ; i < this.joints.length-1 ; i++)
 	  {
-	    fill(178);		
+		
+			fill(238,24,80+i*3);
 		this.joints[i].drawJoint();
 	  }
 	     // draw the head
@@ -86,7 +87,7 @@ function snake()
 	this.addJoint = function()
 	{
 	  this.joints[this.joints.length] = new joint();
-	  this.joints[this.joints.length-1].updateJointLocation(this.joints[this.joints.length-2].Xpos,this.joints[this.joints.length-2].Ypos);
+	 // this.joints[this.joints.length-1].updateJointLocation(this.joints[this.joints.length-2].Xpos,this.joints[this.joints.length-2].Ypos);
 	    
 	}
 	
