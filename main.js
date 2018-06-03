@@ -14,9 +14,27 @@ var startGameSecond = 0;
 // פונקציה סטאפ שקוראת פעם אחת
 function setup() 
 {
+    txt = createDiv("Press \"A\" for automatic mode");
+    txt.position(Scl*Len, 50);
+    txt.style("font-family", "monospace");
+    txt.style("background-color", "#FF0000");
+    txt.style("color", "#FFFFFF");
+    txt.style("font-size", "18pt");
+    txt.style("padding", "10px");
+  
+    txt = createDiv("Press \"M\" for Maual mode");
+    txt.position(Scl*Len, 100);
+    txt.style("font-family", "monospace");
+    txt.style("background-color", "#00FF00");
+    txt.style("color", "#FFFFFF");
+    txt.style("font-size", "18pt");
+    txt.style("padding", "10px");
+ 
  createCanvas(Scl*Len, Scl*Len); // המשטח בגודל של מספר המשבצות למשל 20 כפול גודל משבצת
+ 
  newgame();
 }
+
 
 
 function newgame()
