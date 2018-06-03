@@ -32,7 +32,7 @@ function setup()
 	   txt = createDiv("touch finger for manual mode");
 	   else
 		txt = createDiv("Press \"M\" for manual mode");
-    txt.position(Scl*Len, 100);
+    txt.position(Scl*Len, 150);
     txt.style("font-family", "monospace");
     txt.style("background-color", "#00FF00");
     txt.style("color", "#FFFFFF");
