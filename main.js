@@ -195,37 +195,7 @@ var y=0;
   nextMoveValue(x,y);
 }
 
-function touchEnded1() {
-var x=0;
-var y=0;
-	
-	
-	var len =  touches.length;
-	if(len<10)
-	 return;
-	 line(touches[0].x, touches[0].y, touches[len-1].x, touches[len-1].y);
-	var deltax = touches[len-1].x - touches[0].x;
-	var deltay = touches[len-1].y - touches[0].y;
-	if( deltay > 0 && deltay > 10) // Down
-	{
-		y=1; x=0;
-	}  
-    if( deltay < 0 && deltay < -10) // Up
-	{
-		y=-1; x=0;
-	}  
-    if( deltax < 0 && deltax < -10) // Left
-	{
-		y=0; x=-1;
-	}
-    if( deltax > 0 && deltax > 10) // Right
-	{
-		y=0; x=1;
-	} 
-	
-	if(x!=0 || y!=0)
-		nextMoveValue(x,y);  	
-}
+
 
 // פונקציה שנקראת אוטומטית כל פעם שנלחץ מקש על המקלדת
 function touchStarted(){
